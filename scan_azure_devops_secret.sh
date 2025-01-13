@@ -99,7 +99,7 @@ for repo in $repos; do
   SOURCE_REPOSITORY_URI_SUFFIX=$(echo ${repo_url//https:\/\//})
   SOURCE_REPOSITORY_URI="https://$AZURE_DEVOPS_EXT_PAT@$SOURCE_REPOSITORY_URI_SUFFIX"
 
-  git clone $SOURCE_REPOSITORY_URI $repo_id
+  git clone --depth 1 $SOURCE_REPOSITORY_URI $repo_id
 
   echo "[$iteration] Scanning the repo [$repo_url] with Gitleaks"
 
