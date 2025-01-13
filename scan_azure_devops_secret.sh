@@ -105,6 +105,9 @@ for repo in $repos; do
 
   cd $repo_id
 
+  cp common.gitleaks.toml $repo_id/
+  cp -n .gitleaks.toml $repo_id/
+  
   ../gitleaks/gitleaks detect -v --no-git --exit-code 0 --redact --report-format json --report-path ./gitleaks.json
 
   for secret in $(cat ./gitleaks.json | jq -r '.[] | @base64'); do

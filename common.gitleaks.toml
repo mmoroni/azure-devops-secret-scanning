@@ -1,0 +1,15 @@
+[extend]
+useDefault = true
+
+[[rules]]
+id = "mssql-connection-string"
+description = "Detected a Microsoft SQL connection string with a password."
+regex = '''(?i)(?:Data Source|server|Initial Catalog|Database).*(?:Data Source|server|Initial Catalog|Database).*[\w.-]{0,50}?(?:password)(?:[ \t\w.-]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:{1,3}=|\|\|:|<=|=>|:|\?=)(?:'|\"|\s|=|\x60){0,5}([\w.=@#!?$()-]{1,150})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
+keywords = [
+    "password"
+]
+[rules.allowlist]
+# Ignore passwords that look like $(placeholder), as they are replaced by the deployment pipelines
+regexes = [
+    '''\$\(.*\)''',    
+]
